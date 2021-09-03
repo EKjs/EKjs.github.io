@@ -5,6 +5,7 @@ import { PencilSquare, Trash } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { AppContext } from "../context/AppContext";
 import LoadingSpinner from './LoadingSpinner';
+import UserRating from './UserRating';
 
 const UserProfile = () => {
     const { signOut } = useContext(AppContext);
@@ -114,6 +115,14 @@ const UserProfile = () => {
               </Col>
               <Col>
               <h5>{profileData.userType}</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              <h5><small className="text-muted">Your rating: </small></h5>
+              </Col>
+              <Col>
+                <UserRating userId={profileData.userId} />
               </Col>
             </Row>
             <Row className='mt-4'>

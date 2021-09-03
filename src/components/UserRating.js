@@ -66,7 +66,7 @@ const UserRating = ({userId}) => {
   }
 
     return (
-        <div>{isAuthenticated ? <Rating onClick={handleRating} ratingValue={rating} /> : <RatingView ratingValue={rating} />}
+        <div>{isAuthenticated &&  userId!==parseInt(localStorage.getItem('userId'),10) ? <Rating onClick={handleRating} ratingValue={rating} /> : <RatingView ratingValue={rating} />}
             
         </div>
     )
