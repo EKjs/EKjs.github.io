@@ -7,6 +7,7 @@ import LoadingSpinner from './LoadingSpinner';
 import { Map, Marker } from "pigeon-maps";
 import { TelephoneFill } from 'react-bootstrap-icons';
 import AddToFavsButton from './AddToFavsButton';
+import UserRating from './UserRating';
 
 const ViewSingleAd = () => {
     const {adId}=useParams();
@@ -116,6 +117,11 @@ if (loading)return <LoadingSpinner/>
                       <h5><TelephoneFill size={24}/> {adData.userPhone}</h5><br/>
                     
                     </Col>  
+                  </Row>
+                  <Row>
+                    <Col>
+                    <UserRating userId={adData.ownerId} />
+                    </Col>
                   </Row>
                   <Row>
                     <Col>
