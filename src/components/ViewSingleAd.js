@@ -83,11 +83,11 @@ if (loading)return <LoadingSpinner/>
 
 </Row>
 <Row className="mt-4">
-            <Col >
+            <Col>
                  <p className='fs-6 text-muted'>Views: {adData.views}</p> 
                   
               </Col>
-              <Col>
+              <Col className='text-center'>
               <AddToFavsButton targetId={adData.adId} description={adData.title} />
               </Col>
               <Col>
@@ -102,12 +102,28 @@ if (loading)return <LoadingSpinner/>
               <Col sm={4} >
                   <Row>
                   <Col className="m-3 p-3"  style={{backgroundColor:'#faf9f9'}}>
-                  {adData.storeId && (<><Link to={`/viewstore/${adData.storeId}`} style={{textDecoration:'none'}}><h4 classname="secondary">{adData.storeName}</h4></Link><br/></>)}
-                  <Link className="fs-6 text-muted" to={`/byuser/${adData.ownerId}`} style={{textDecoration:'none'}}><h4>{adData.userName}</h4></Link> <br/>
-                  <h5><TelephoneFill size={24}/> {adData.userPhone}</h5><br/>
-                  <p className='fs-6 text-muted'>Member since {new Date(adData.created).toLocaleString()}</p>
-                  <p className='fs-6 text-muted'>Was online {new Date(adData.wasOnline).toLocaleString()}</p>
-                  <AddToFavsButton targetId={adData.ownerId} description={adData.userName} path='user' />
+                    {adData.storeId && (<Row><Col><Link to={`/viewstore/${adData.storeId}`} style={{textDecoration:'none'}}><h4 classname="secondary">{adData.storeName}</h4></Link><br/></Col></Row>)}
+                  <Row>
+                  <Col sm={9}>
+                    <Link className="fs-6 text-muted" to={`/byuser/${adData.ownerId}`} style={{textDecoration:'none'}}><h4>{adData.userName}</h4></Link>
+                  </Col>
+                  <Col className='text-end'>
+                    <AddToFavsButton targetId={adData.ownerId} description={adData.userName} path='user' />
+                  </Col>
+                  </Row>                      
+                  <Row className='mt-2'>
+                    <Col>
+                      <h5><TelephoneFill size={24}/> {adData.userPhone}</h5><br/>
+                    
+                    </Col>  
+                  </Row>
+                  <Row>
+                    <Col>
+                    <p className='fs-6 text-muted'>Member since {new Date(adData.created).toLocaleString()}<br/>
+                      Was online {new Date(adData.wasOnline).toLocaleString()}</p>
+                    </Col>
+                  </Row>
+                  
                   </Col>
                   </Row>
                   <Row>

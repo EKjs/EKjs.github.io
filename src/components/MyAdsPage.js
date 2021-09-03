@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Alert, Row, Table, Modal, Button,Toast,ToastContainer,FloatingLabel,Form } from "react-bootstrap";
+import { Alert, Row,Col, Table, Modal, Button,Toast,ToastContainer,FloatingLabel,Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PencilSquare,Trash,Toggle2On } from "react-bootstrap-icons";
 import LoadingSpinner from "./LoadingSpinner";
@@ -125,6 +125,13 @@ const MyAdsPage = () => {
     if (error) return <Alert variant="danger">{error}</Alert>;
 
     return (<>
+            <Row>
+          <Col>
+            <Row className='mb-4'>
+              <Col className='text-center'>
+                <h4>Your ads</h4>
+              </Col> 
+            </Row>
       <Row>
       <ToastContainer className="p-3" position={'middle-center'}>
       <Toast bg='warning' onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide>
@@ -173,6 +180,10 @@ const MyAdsPage = () => {
       </tbody>
       </Table>
         </Row>
+        </Col>
+        </Row>
+
+
         <Modal
       show={showModal}
       onHide={handleModalClose}

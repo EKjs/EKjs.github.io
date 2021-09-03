@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState,useContext } from "react";
 import { OverlayTrigger,Tooltip } from "react-bootstrap";
 import { AppContext } from "../context/AppContext";
-import { Heart,HeartFill } from "react-bootstrap-icons";
+import { Heart,HeartFill,Star,StarFill } from "react-bootstrap-icons";
 
 const AddToFavsButton = ({targetId,description,path}) => {
     const { isAuthenticated } = useContext(AppContext);
@@ -31,13 +31,33 @@ const AddToFavsButton = ({targetId,description,path}) => {
           }
       }
 
-      if (!isAuthenticated)return <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Sign in to add to favs</Tooltip>}>
-      <span className="d-inline-block">
-        <Heart style={{ pointerEvents: 'none' }} />
-      </span>
-    </OverlayTrigger>
-      if (addedToFavs) return <HeartFill size={30} color='red' />
-      else return <Heart size={30} color='red' style={{cursor:'pointer'}} onClick={()=>addToFavors()} />
+      if (!isAuthenticated)
+        return (
+          <OverlayTrigger
+            overlay={
+              <Tooltip id="tooltip-disabled">Sign in to add to favs</Tooltip>
+            }
+          >
+            <span className="d-inline-block">
+              {path==='user' ? <Star style={{ pointerEvents: "none" }}/>:<Heart style={{ pointerEvents: "none" }} />}
+            </span>
+          </OverlayTrigger>
+        );
+      if (addedToFavs){
+        if (path==='user')return <StarFill  color="red" />;
+        return <HeartFill  color="red" />;
+      }
+      else{
+        if (path==='user')return <Star  color="red" style={{ cursor: "pointer" }} onClick={() => addToFavors()} />;
+        return (
+          <Heart
+            
+            color="red"
+            style={{ cursor: "pointer" }}
+            onClick={() => addToFavors()}
+          />
+        );
+      }
 
 }
 

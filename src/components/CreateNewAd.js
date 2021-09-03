@@ -218,7 +218,13 @@ const uploadImages = async(e) => {
     if(!curSubCatList || loading)return <LoadingSpinner/>;
 
     return (
-      <>
+      <>                 
+        <Row className='mb-4'>
+          <Col className='text-center'>
+            <h4>{adId ? 'Edit' : 'Create'} ad</h4>
+          </Col> 
+        </Row>
+
         <Row>
           {error && <Alert>{error}</Alert>}
           <Col>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Alert, Row, Table, Modal, Button,Toast,ToastContainer,Form } from "react-bootstrap";
+import { Alert, Row, Col, Table, Modal, Button,Toast,ToastContainer,Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PencilSquare,Trash } from "react-bootstrap-icons";
 import LoadingSpinner from "./LoadingSpinner";
@@ -16,7 +16,7 @@ const MyFavUsers = () => {
     const [updateFavList,setUpdateFavList] = useState(false);
 
     const [editId,setEditId] = useState();
-    const [editAdId,setEditAdId] = useState();
+    const [editTargetId,setEditTargetId] = useState();
     const [editFavText, setEditFavText] = useState('');
     const [showModalEditor,setShowModalEditor] = useState(false);
 
@@ -47,10 +47,10 @@ const MyFavUsers = () => {
         getFavUsers();
     }, [updateFavList]);
 
-    const handleDeleteFavAd = async () => {
+    const handleDeleteFav = async () => {
       try {
           setLoading(true);
-          const { data } = await axios.delete(`${process.env.REACT_APP_BE}favads/${deleteId}`,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}});
+          const { data } = await axios.delete(`${process.env.REACT_APP_BE}favusers/${deleteId}`,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}});
           console.log(data);
           setShowModal(false);
           if (data.id===deleteId){
@@ -73,12 +73,12 @@ const MyFavUsers = () => {
 
      const handleSaveChanges = async() =>{
        const editData = {
-        favAdId:editAdId,
+        favUserId:editTargetId,
         description:editFavText
        }
        try {
         setLoading(true);
-        const { data } = await axios.put(`${process.env.REACT_APP_BE}favads/${editId}`,editData,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}});
+        const { data } = await axios.put(`${process.env.REACT_APP_BE}favusers/${editId}`,editData,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}});
         console.log(data);
         setShowModalEditor(false);
         setLoading(false);
@@ -100,6 +100,13 @@ const MyFavUsers = () => {
     if (error) return <Alert variant="danger">{error}</Alert>;
 
     return (<>
+                    <Row>
+          <Col>
+            <Row className='mb-4'>
+              <Col className='text-center'>
+                <h4>Your fav users</h4>
+              </Col> 
+            </Row>
       <Row>
       <ToastContainer className="p-3" position={'middle-center'}>
       <Toast bg='warning' onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide>
@@ -109,8 +116,8 @@ const MyFavUsers = () => {
         <Table responsive="sm">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Description</th>
+        <th>User</th>
+        <th>Your description</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -118,12 +125,12 @@ const MyFavUsers = () => {
     <tbody>
             {favUsers.map((fav,idx)=>(
             <tr key={`adk${idx}`}>
-              <td><Link to={`/view/${fav.adId}`} style={{textDecoration:'none'}}>{fav.adTitle}</Link></td>
+              <td><Link to={`/byuser/${fav.targetUserId}`} style={{textDecoration:'none'}}>{fav.userName}</Link></td>
               <td>{fav.description}</td>
               <td><PencilSquare size={24} style={{cursor:'pointer'}} onClick={()=>{
                 setEditFavText(fav.description);
                 setEditId(fav.id);
-                setEditAdId(fav.adId);
+                setEditTargetId(fav.targetUserId);
                 setShowModalEditor(true);
               }}/> </td>
               <td><Trash size={24} style={{cursor:'pointer'}} onClick={()=>{
@@ -133,6 +140,8 @@ const MyFavUsers = () => {
             </tr> ))}
       </tbody>
       </Table>
+        </Row>
+        </Col>
         </Row>
         <Modal
       show={showModal}
@@ -150,7 +159,7 @@ const MyFavUsers = () => {
         <Button variant="success" onClick={handleModalClose}>
           No, missclicked!
         </Button>
-        <Button variant="danger" onClick={handleDeleteFavAd}>Yes, pls delete!</Button>
+        <Button variant="danger" onClick={handleDeleteFav}>Yes, pls delete!</Button>
       </Modal.Footer>
     </Modal>
     <Modal

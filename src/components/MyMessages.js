@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Alert, Row, Table } from "react-bootstrap";
+import { Alert, Row, Col, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CheckCircle,CheckAll, Trash } from "react-bootstrap-icons";
 import LoadingSpinner from "./LoadingSpinner";
@@ -80,28 +80,28 @@ const deleteMsg = async(msgId)=>{
 
     if (loading) return <LoadingSpinner />;
     if (error) return <Alert variant="danger">{error}</Alert>;
-    if (!messageList || messageList.length<1) return <Alert variant="danger">No messages</Alert>;
+    //if (!messageList || messageList.length<1) return ;
 
     return (<>
+                    <Row>
+          <Col>
+            <Row className='mb-4'>
+              <Col className='text-center'>
+                <h4>Your messages</h4>
+              </Col> 
+            </Row>
       <Row>
         <Table responsive="sm">
     <thead>
       <tr>
         <th>From</th>
         <th>Title</th>
-        {/* <th>Description</th> */}
         <th>Link to ad</th>
         <th>Mark</th>
-{/*         <th>Sub category</th>
-        <th>Category</th>
-        <th>Created on</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        <th>Status</th> */}
       </tr>
     </thead>
     <tbody>
-            {messageList.map((msg,idx)=>(
+            {messageList && messageList.map((msg,idx)=>(
             <tr key={`adk${idx}`}>
               <td><p>{msg.fromUserName}</p></td>
               <td><p>{msg.msgRead ? msg.msgTitle : <mark>{msg.msgTitle}</mark>}</p></td>
@@ -112,29 +112,13 @@ const deleteMsg = async(msgId)=>{
               <Trash size={24} style={{cursor:'pointer'}} onClick={()=>{
                 deleteMsg(msg.id);
               }} />
-              
-              
               </td>
-              {/* <td>{ad.description && ad.description.substring(0,50)}</td> */}
-{/*               <td>{ad.price}</td>
-              <td>{ad.subCategory}</td>
-              <td>{ad.category}</td>
-              <td>{new Date(ad.created).toLocaleString()}</td>
-              <td><Link to={`/editad/${ad.adId}`}><PencilSquare size={24} /></Link></td>
-              <td><Trash size={24} style={{cursor:'pointer'}} onClick={()=>{
-                setDeleteId(ad.adId);
-                setShowModal(true)
-              }} /></td>
-              <td><Toggle2On size={24} style={{cursor:'pointer'}} onClick={()=>{
-                setAdStatus(ad.currentState);
-                setAdIdForStatus(ad.adId);
-                setShowModalStateChg(true)
-              }} /></td> */}
             </tr> ))}
       </tbody>
       </Table>
+      {(!messageList || messageList.length<1) && <Alert variant="danger">No messages</Alert>}
         </Row>
-
+</Col></Row>
 
     </>
     )

@@ -2,10 +2,12 @@ import { useEffect, useState,useContext } from "react";
 import axios from "axios";
 import { Alert, Row, Col, FloatingLabel, Form } from "react-bootstrap";
 import AdCard from "./AdCard";
+import PageNums from "./PageNums";
 import LoadingSpinner from "./LoadingSpinner";
 import { AppContext } from "../context/AppContext";
 
-    
+const ADSPERPAGE=8;
+
 const SearchResults = () => {
 
     const {  categoriesList, subCategoriesList ,searchParams,setSearchParams } = useContext(AppContext);
@@ -17,6 +19,8 @@ const SearchResults = () => {
     const [curSubCatList,setCurSubCatList] = useState([]);
     const [searchInCat,setSearchInCat] = useState(false);
     const [searchInSubCat,setSearchInSubCat] = useState(false);
+    const [curPage,setCurPage] = useState(1);
+    const [totalPages,setTotalPages] = useState();
 
     useEffect(() => {
 
@@ -24,8 +28,14 @@ const SearchResults = () => {
             try {
                 setLoading(true);
                 console.log(process.env.REACT_APP_BE);
-                const { data:adList } = await axios.post(`${process.env.REACT_APP_BE}search/v2/`,searchParams);
+                const { data:adList } = await axios.post(`${process.env.REACT_APP_BE}search/v2/?skip=${(curPage-1)*ADSPERPAGE}&limit=${ADSPERPAGE}`,searchParams);
                 setCurrentlyLoadedAds(adList);
+                if(adList.length>0){
+                  setTotalPages(Math.ceil(parseInt(adList[0].totalRows,10)/ADSPERPAGE));
+                }else {
+                  setTotalPages(0);
+                  setCurPage(1);
+                }
                 console.log(adList);
                 setLoading(false);
               } catch (error) {
@@ -41,7 +51,7 @@ const SearchResults = () => {
               }
         }
         getAds()
-    }, [searchParams]);
+    }, [searchParams,curPage]);
 
     useEffect(() => {
       console.log(searchInCat);
@@ -166,7 +176,11 @@ const SearchResults = () => {
              /> ))}
           </Row>
           </Col>
-
+          <Row className='d-flex align-items-center justify-content-center mt-4'>
+          <Col sm='auto' className='align-self-center'>
+          <PageNums totalPages={totalPages} currentPage={curPage} cbPageClick={setCurPage} />
+          </Col>
+        </Row>
         </Row>
     )
 }

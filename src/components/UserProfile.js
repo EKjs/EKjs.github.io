@@ -64,44 +64,75 @@ const UserProfile = () => {
     if(loading)return <LoadingSpinner/>;
     return (
       <>
-        <Row className="justify-content-center">
-          {error && <Alert>{error}</Alert>}
-          <Col sm={6}>
+        <Row>
+          <Col>
+            <Row className='mb-4'>
+              <Col className='text-center'>
+                <h4>Your profile</h4>
+              </Col> 
+            </Row>
+            <Row className="justify-content-center">
+            <Col sm={6}>
+            {error && <Alert>{error}</Alert>}
             <Row>
               <Col>
-                <h4>
-                  <small className="text-muted">User name: </small>
+              <h5><small className="text-muted">User name: </small></h5>
+              </Col>
+              <Col>
+              <h5>
                   {profileData.name}
-                </h4>
-                <h4>
-                  <small className="text-muted">E-Mail: </small>
-                  {profileData.email}
-                </h4>
-                <h4>
-                  <small className="text-muted">Phone number: </small>
-                  {profileData.phone}
-                </h4>
-                <h4>
-                  <small className="text-muted">Registered on: </small>
-                  {new Date(profileData.registerDate).toLocaleString()}
-                </h4>
-                <h4>
-                  <small className="text-muted">User type: </small>
-                  {profileData.userType}
-                </h4>
+                </h5>
               </Col>
             </Row>
             <Row>
               <Col>
+              <h5><small className="text-muted">E-Mail: </small></h5>
+              </Col>
+              <Col>
+              <h5>  {profileData.email}</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              <h5><small className="text-muted">Phone number: </small></h5>
+              </Col>
+              <Col>
+              <h5> {profileData.phone}</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              <h5><small className="text-muted">Registered on: </small></h5>
+              </Col>
+              <Col>
+              <h5>{new Date(profileData.registerDate).toLocaleString()} </h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              <h5><small className="text-muted">User type: </small></h5>
+              </Col>
+              <Col>
+              <h5>{profileData.userType}</h5>
+              </Col>
+            </Row>
+            <Row className='mt-4'>
+              <Col>
                 <Button variant="outline-dark" as={Link} to="/editprofile">
-                  <PencilSquare /> Edit profile{" "}
+                  <PencilSquare /> Edit profile
                 </Button>
-                <Button variant="outline-danger" onClick={handleModalShow}>
+              </Col>
+              <Col>
+              <Button variant="outline-danger" onClick={handleModalShow}>
                   <Trash /> Delete profile
-                </Button>{" "}
+                </Button>
               </Col>
             </Row>
           </Col>
+            </Row>
+          </Col>
+          
+
         </Row>
         <Modal
           show={showModal}

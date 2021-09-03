@@ -24,6 +24,9 @@ const CitiesSearchInput = ({setCoords,setCityId,cityPlaceholder}) => {
     };
 
     const changePlzOrCityInput = (e) => {
+        console.log(e.target.value);
+        setCityId(null);
+        setCoords(null);
         const curInpVal = e.target.value;
         setPlzOrCityInput(curInpVal);
         if (curInpVal.length > 2) {

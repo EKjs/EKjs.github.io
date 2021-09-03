@@ -29,6 +29,7 @@ function App() {
         <Row className="justify-content-center my-4">
           <Col md={9}>
             <Switch>
+            <Route exact path="/" component={MainPage} />
               <Route exact path="/view/:adId" component={ViewSingleAd} />
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
@@ -77,7 +78,7 @@ function App() {
               <Route exact path="/byuser/:adsByUserId" component={MainPage} />
               <Route exact path="/bystore/:adsByStoreId" component={MainPage} />
 
-              <Route exact path="/" component={MainPage} />
+              
               <Route path="*" component={NotFound} />
             </Switch>
           </Col>

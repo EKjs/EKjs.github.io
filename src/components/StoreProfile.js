@@ -78,6 +78,13 @@ const StoreProfile = () => {
 
     return (
       <>
+                          <Row>
+          <Col>
+            <Row className='mb-4'>
+              <Col className='text-center'>
+                <h4>Your store</h4>
+              </Col> 
+            </Row>
         <Row className="justify-content-center">
           {error && <Alert>{error}</Alert>}
           <Col sm={6}>
@@ -103,17 +110,21 @@ const StoreProfile = () => {
                   </Map>
               </Col>
             </Row>
-            <Row>
+            <Row className="justify-content-center">
               <Col>
-                <Button variant="outline-dark" as={Link} to={`/editstore/${storeData.id}`}>
+              <Button variant="outline-dark" as={Link} to={`/editstore/${storeData.id}`}>
                   <PencilSquare /> Edit store data
                 </Button>
-                <Button variant="outline-danger" onClick={handleModalShow}>
+              </Col>
+              <Col>
+              <Button variant="outline-danger" onClick={handleModalShow}>
                   <Trash /> Delete store
-                </Button>
+                </Button>  
               </Col>
             </Row>
           </Col>
+        </Row>
+        </Col>
         </Row>
         <Modal
           show={showModal}
