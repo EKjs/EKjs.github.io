@@ -46,7 +46,7 @@ const ViewStore = () => {
                  {storeData.title}
                 </h4>
               </Link>
-                <p>{storeData.description}</p>
+                <p style={{whiteSpace:'pre-line'}}>{storeData.description}</p>
                 <h6>
                   <small className="text-muted">Address: </small>
                 </h6>

@@ -96,7 +96,7 @@ if (loading)return <LoadingSpinner/>
 <Col>
                   <h4>{adData.title}</h4>
                   {adData.price && adData.price>0 && <h3>{adData.price}€</h3>}
-                  <p className="mt-3">{adData.description}</p>
+                  <p className="mt-3" style={{whiteSpace:'pre-line'}}>{adData.description}</p>
               </Col>
 
 </Row>

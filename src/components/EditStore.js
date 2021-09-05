@@ -23,13 +23,19 @@ const EditStore = () => {
     const [cityId,setCityId] = useState();
     const [coords,setCoords] = useState();
     const [cityName,setCityName] = useState();
+    const [storeAdminId,setStoreAdminId] = useState();
     const hist = useHistory();
 
     useEffect(() => {
       const loadStoreDetails = async ()=>{
         try {
             setLoading(true);
-            const { data } = await axios.get(`${process.env.REACT_APP_BE}stores/my/`,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}});
+            let url=`${process.env.REACT_APP_BE}stores/my/`;
+            if (localStorage.getItem('userType')==='999'){
+              console.log('adamin');
+              url=`${process.env.REACT_APP_BE}stores/${storeId}`;
+            }
+            const { data } = await axios.get(url,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}});
             //setStoreData(data);
             setStoreTitle(data.title);
             setStoreAddress(data.address);
@@ -38,6 +44,7 @@ const EditStore = () => {
             setCityId(data.cityId);
             setCoords(data.coords);
             setCityName(data.cityName);
+            setStoreAdminId(data.adminId)
             console.log(data);
             setLoading(false);
           } catch (error) {
@@ -108,6 +115,8 @@ const uploadImage = async (e) => {
     },[]); */
 
      const handleSaveChanges = async ()=>{
+       console.log('id',localStorage.getItem('userId'),storeAdminId);
+       const usrIdToSet = localStorage.getItem('userType')==='999' ? storeAdminId : parseInt(localStorage.getItem('userId'),10);
         const storeData={
             title:storeTitle,
             address:storeAddress,
@@ -115,6 +124,7 @@ const uploadImage = async (e) => {
             coords:coords,
             cityId:cityId,
             photo:storeLogoImg,
+            ownerId:usrIdToSet,
         };
         try {
             setLoading(true);

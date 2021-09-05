@@ -113,7 +113,7 @@ const StoresOnMap = () => {
           {storesData && storesData.length>0 && storesData.map((str,idx)=>(<Marker key={`mrK${idx}`} width={50} anchor={str.coords} color='lightgreen' />))}
             {coords && <Marker width={50} anchor={coords} />}
             {storesData && storesData.length>0 && storesData.map((str,idx)=>(<Overlay  key={`ovrlK${idx}`} anchor={str.coords} offset={[0, 50]}>
-            <div className='bg-dark' style={{ borderRadius:'10%'}}><Link to={`/viewstore/${str.id}`}> <p className='text-light'>{str.title}</p></Link></div>
+            <div className='bg-dark' style={{ borderRadius:'10%', padding:'0 10px'}}><Link to={`/viewstore/${str.id}`}> <p className='text-light'>{str.title}</p></Link></div>
           </Overlay>))}
         </Map>  
         </Col>

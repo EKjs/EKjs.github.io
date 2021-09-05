@@ -24,6 +24,8 @@ import MyFavUsers from "./components/MyFavUsers";
 import AdminEditUserTypes from "./components/admin/AdminEditUserTypes";
 import AdminListUsers from "./components/admin/AdminListUsers";
 import StoresOnMap from "./components/StoresOnMap";
+import AdminListStores from "./components/admin/AdminListStores";
+import Chat from "./components/Chat";
 function App() {
   return (
     <AppContextWrapper>
@@ -34,6 +36,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={MainPage} />
               <Route exact path="/buylocal" component={StoresOnMap} />
+              <Route exact path="/chat" component={Chat} />
               <Route exact path="/view/:adId" component={ViewSingleAd} />
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
@@ -82,7 +85,11 @@ function App() {
               component={AdminListUsers}
             />
 
-
+<ProtectedRoute
+              exact
+              path="/admin/storeslist"
+              component={AdminListStores}
+            />
               <Route
                 exact
                 path="/bysubcategory/:subCatId"

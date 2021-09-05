@@ -1,7 +1,8 @@
-import { Form, Button, Col, Row, FloatingLabel,Alert,Spinner } from "react-bootstrap";
+import { Form, Button, Col, Row, FloatingLabel,Alert } from "react-bootstrap";
 import { useState,useContext } from 'react';
 import { Redirect,useLocation } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import LoadingSpinner from "./LoadingSpinner";
 
 const SignUp = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const SignUp = () => {
         }}
       />
     );
-  if (loading) return <Spinner animation="border" variant="secondary" />;
+  if (loading) return <LoadingSpinner />
   return (
     <Row className="justify-content-center mt-5">
       <Col md={4}>

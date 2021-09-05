@@ -67,6 +67,7 @@ const Navigation = () => {
                 <Dropdown.Item as={Link} to="/admin/categoryeditor">Edit categories</Dropdown.Item>
                 <Dropdown.Item as={Link} to="/admin/usertypeeditor">Edit user types</Dropdown.Item>
                 <Dropdown.Item as={Link} to="/admin/userlist">Edit users</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/admin/storeslist">Edit stores</Dropdown.Item>
                 
               </Dropdown.Menu>
             </Dropdown>
