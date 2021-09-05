@@ -21,6 +21,9 @@ import StoreProfile from "./components/StoreProfile";
 import ViewStore from "./components/ViewStore";
 import NotFound from "./components/NotFound";
 import MyFavUsers from "./components/MyFavUsers";
+import AdminEditUserTypes from "./components/admin/AdminEditUserTypes";
+import AdminListUsers from "./components/admin/AdminListUsers";
+import StoresOnMap from "./components/StoresOnMap";
 function App() {
   return (
     <AppContextWrapper>
@@ -29,7 +32,8 @@ function App() {
         <Row className="justify-content-center my-4">
           <Col md={9}>
             <Switch>
-            <Route exact path="/" component={MainPage} />
+              <Route exact path="/" component={MainPage} />
+              <Route exact path="/buylocal" component={StoresOnMap} />
               <Route exact path="/view/:adId" component={ViewSingleAd} />
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
@@ -67,6 +71,17 @@ function App() {
                 path="/admin/categoryeditor"
                 component={AddEditCategory}
               />
+              <ProtectedRoute
+              exact
+              path="/admin/usertypeeditor"
+              component={AdminEditUserTypes}
+            />
+                <ProtectedRoute
+              exact
+              path="/admin/userlist"
+              component={AdminListUsers}
+            />
+
 
               <Route
                 exact

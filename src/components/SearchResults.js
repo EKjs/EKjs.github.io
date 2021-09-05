@@ -5,6 +5,7 @@ import AdCard from "./AdCard";
 import PageNums from "./PageNums";
 import LoadingSpinner from "./LoadingSpinner";
 import { AppContext } from "../context/AppContext";
+import NoAdsFound from "./NoAdsFound";
 
 const ADSPERPAGE=8;
 
@@ -23,7 +24,6 @@ const SearchResults = () => {
     const [totalPages,setTotalPages] = useState();
 
     useEffect(() => {
-
         const getAds = async () => {
             try {
                 setLoading(true);
@@ -55,7 +55,8 @@ const SearchResults = () => {
 
     useEffect(() => {
       console.log(searchInCat);
-      if(searchInCat)setSearchParams(prev=>{
+      if(searchInCat){
+        setSearchParams(prev=>{
         const reqBody = {
           cityId: prev.cityId,
           cityCoords:prev.cityCoords,
@@ -65,15 +66,55 @@ const SearchResults = () => {
           subCatId:null,
         };
         return reqBody;
+      })
+    }
+      else {
+        setSearchParams(prev=>{
+        const reqBody = {
+          cityId: prev.cityId,
+          cityCoords:prev.cityCoords,
+          distance: prev.distance,
+          searchText:prev.searchText,
+          catId:null,
+          subCatId:null,
+        };
+        return reqBody;
       });
-    }, [searchInCat,selectedCatId,setSearchParams])
+    }
+    }, [searchInCat,selectedCatId,setSearchParams]);
+
     useEffect(() => {
       console.log(searchInSubCat);
-      if(searchInSubCat)setSearchParams(prev=>{
-        prev.subCatId=selectedSubCatId;
-        return prev;
-      });
-    }, [searchInSubCat,selectedSubCatId,setSearchParams])
+      if(searchInSubCat){
+        setSearchParams(prev=>{
+        const reqBody = {
+          cityId: prev.cityId,
+          cityCoords:prev.cityCoords,
+          distance: prev.distance,
+          searchText:prev.searchText,
+          catId:null,
+          subCatId:selectedSubCatId,
+        };
+        return reqBody;
+        /* prev.subCatId=selectedSubCatId;
+        return prev; */
+      })
+    }else {
+      setSearchParams(prev=>{
+        const reqBody = {
+          cityId: prev.cityId,
+          cityCoords:prev.cityCoords,
+          distance: prev.distance,
+          searchText:prev.searchText,
+          catId:null,
+          subCatId:null,
+        };
+        return reqBody;
+        /* prev.subCatId=selectedSubCatId;
+        return prev; */
+      })
+    }
+    }, [searchInSubCat,selectedSubCatId,setSearchParams]);
 
     useEffect(() => {
       if (selectedCatId){
@@ -82,15 +123,13 @@ const SearchResults = () => {
           setCurSubCatList(subCatsOfCat);
           if(subCatsOfCat.length>0){
               setSelectedSubCatId(subCatsOfCat[0].id)
-              
           }else{
-              
-              setSelectedSubCatId(null);
+              setSelectedSubCatId('');
           }
       }else{
-          
-          setSelectedCatId(categoriesList[0].id);
-          
+          if (categoriesList && categoriesList.length>0){
+            setSelectedCatId(categoriesList[0].id);
+          }
       }
   }, [selectedCatId,subCategoriesList,categoriesList]);
 
@@ -121,7 +160,13 @@ const SearchResults = () => {
           </Col>
           <Col>
           <div className="form-check form-switch">
-          <input className="form-check-input" type="checkbox" id="switchUseCategories" defaultChecked={searchInCat} onChange={(e)=>setSearchInCat(e.target.checked)} />
+          <input className="form-check-input" type="checkbox" id="switchUseCategories" defaultChecked={searchInCat} 
+          onChange={(e)=>{
+            if(e.target.checked===true){
+              setSearchInSubCat(false);
+            }
+            setSearchInCat(e.target.checked);
+          }} />
           <label className="form-check-label" htmlFor="switchUseCategories">Search in this category</label>
         </div>
           </Col>
@@ -147,17 +192,23 @@ const SearchResults = () => {
               </Form.Select>
             </FloatingLabel>
           </Col>
-          <Col>
+           <Col>
           <div className="form-check form-switch">
-          <input className="form-check-input" type="checkbox" id="switchUseSubCategories" defaultChecked={searchInSubCat} onChange={(e)=>setSearchInSubCat(e.target.checked)} />
+          <input className="form-check-input" type="checkbox" id="switchUseSubCategories" defaultChecked={searchInSubCat} 
+          onChange={(e)=>{
+            if (e.target.checked===true){
+              setSearchInCat(false)
+            }
+            setSearchInSubCat(e.target.checked);
+            }} />
           <label className="form-check-label" htmlFor="switchUseSubCategories">Search in this sub category</label>
-        </div>
+        </div> 
           </Col>
           </Row>
           
           <Row className="g-4">
           <Alert variant="success">Search results for: </Alert>
-          {currentlyLoadedAds.length===0 && <Alert variant="info">No items found!</Alert>}
+          {currentlyLoadedAds.length<1 && <NoAdsFound />}
             {currentlyLoadedAds.map((ad,idx)=>(
             <AdCard key={`adk${idx}`}
             title={ad.title}

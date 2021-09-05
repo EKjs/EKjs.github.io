@@ -123,7 +123,7 @@ const PageNums = ({ totalPages, currentPage, cbPageClick,pageNeighbours }) => {
 /*           <li key={index} className={`page-item${ currentPage === page ? ' active' : ''}`}>
             <a className="page-link" href="#" onClick={ this.handleClick(page) }>{ page }</a>
           </li> */
-          <Pagination.Item active={currentPage === page} onClick={()=>cbPageClick(page) }>{page}</Pagination.Item>
+          <Pagination.Item key={`pgK${page}`} active={currentPage === page} onClick={()=>cbPageClick(page) }>{page}</Pagination.Item>
         );
 
       }) }

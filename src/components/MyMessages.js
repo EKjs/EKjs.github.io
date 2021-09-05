@@ -87,7 +87,7 @@ const deleteMsg = async(msgId)=>{
           <Col>
             <Row className='mb-4'>
               <Col className='text-center'>
-                <h4>Your messages</h4>
+                <h4>Your notifications</h4>
               </Col> 
             </Row>
       <Row>
@@ -116,7 +116,7 @@ const deleteMsg = async(msgId)=>{
             </tr> ))}
       </tbody>
       </Table>
-      {(!messageList || messageList.length<1) && <Alert variant="danger">No messages</Alert>}
+      {(!messageList || messageList.length<1) && <Alert variant="danger">No notifications</Alert>}
         </Row>
 </Col></Row>
 

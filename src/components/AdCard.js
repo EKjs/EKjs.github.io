@@ -2,6 +2,7 @@ import { Card, Col, Row, Container } from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import AddToFavsButton from "./AddToFavsButton";
+import AdminAdButtons from "./admin/AdminAdButtons";
 
 const AdCard = ({
   photo,
@@ -24,6 +25,7 @@ const AdCard = ({
         style={{ width: "18rem", minHeight: "36rem" }}
         border={catId === 13 ? "success" : "secondary"}
       >
+        <AdminAdButtons adId={adId}/>
         <Link to={`/view/${adId}`}>
           <Card.Img
             className="p-3"

@@ -8,7 +8,7 @@ const AddToFavsButton = ({targetId,description,path}) => {
     const { isAuthenticated } = useContext(AppContext);
     const [addedToFavs,setAddedToFavs] = useState(false);
 
-    const addToFavors = async(id,descr) => {
+    const addToFavors = async() => {
         let url=`${process.env.REACT_APP_BE}favads/`;
         let favData = {
             favAdId: targetId,

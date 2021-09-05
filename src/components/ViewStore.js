@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import { Row,Col,Alert } from 'react-bootstrap';
+import { Row,Col,Alert, Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { Map, Marker } from "pigeon-maps";
 import LoadingSpinner from './LoadingSpinner';
@@ -63,7 +63,11 @@ const ViewStore = () => {
                   </Map>
               </Col>
             </Row>
-
+            <Row>
+              <Col className='d-grid gap-2"'>
+                <Button variant='outline-secondary' size="lg" as={Link} to={`/bystore/${storeData.id}`}>{storeData.title}'s ads</Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
 

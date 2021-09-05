@@ -21,6 +21,7 @@ const CreateNewAd = () => {
       };
     const [loading,setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [adOwnerId, setAdOwnerId] = useState();
     const [adTitle, setAdTitle] = useState('');
     const [adPrice, setAdPrice] = useState(0);
     const [adAddress, setAdAddress] = useState('');
@@ -42,6 +43,7 @@ const CreateNewAd = () => {
     const submitDataToServer = async () => {
         //const cleanPhotoArray=photoArray.length>0 ? photoArray.map(ph=>ph.filename) : null;
         const price = Number.isFinite(parseFloat(adPrice)) ? parseFloat(adPrice) : 0;
+        const ownerId=parseInt(localStorage.getItem('userType'),10)===999 && adId ? adOwnerId : parseInt(localStorage.getItem('userId'),10);
         const sendData = {
             title:adTitle,
             description:adDescription,
@@ -53,6 +55,7 @@ const CreateNewAd = () => {
             coords:coords,
             currentState:adCurStatus,
             sellAsStore:sellAsStore,
+            userId:ownerId,
         }
         console.log(sendData);
         try {
@@ -115,16 +118,14 @@ const CreateNewAd = () => {
             const subCatsOfCat=subCategoriesList.filter(subCat=>subCat.parentId===selectedCatId);
             setCurSubCatList(subCatsOfCat);
             if(subCatsOfCat.length>0){
-              if(!adId){
+              //if(!adId){
                 setSelectedSubCatId(subCatsOfCat[0].id)
-              }
+              //}
             }else{
                 setSelectedSubCatId(null);
             }
         }else{
-            
             setSelectedCatId(categoriesList[0].id);
-            
         }
     }, [selectedCatId,subCategoriesList,categoriesList,adId]);
 
@@ -155,6 +156,7 @@ useEffect(() => {
         try {
             setLoading(true);
             const { data } = await axios.get(`${process.env.REACT_APP_BE}ads/${adId}`);
+            setSelectedCatId(data.catId);
             setAdTitle(data.title);
             setAdPrice(data.price);
             setAdAddress(data.address);
@@ -162,11 +164,11 @@ useEffect(() => {
             setAdDescription(data.description)
             setPhotoArray(data.photos);
             console.log('photos',data.photos);
-            setSelectedSubCatId(data.subCategoryId);
-            setCoords(data.coords)
-            setSelectedCatId(data.catId);
+            setCoords(data.coords);
             setCityPlaceholder(data.cityName);
-            setCurCityId(data.cityId)
+            setCurCityId(data.cityId);
+            setAdOwnerId(data.ownerId);
+            setSelectedSubCatId(data.subCategoryId);
             console.log(data);
             setLoading(false);
           } catch (error) {

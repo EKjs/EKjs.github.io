@@ -133,6 +133,7 @@ const AppContextWrapper = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     localStorage.removeItem("userId");
+    localStorage.removeItem("userType");
     setIsAuthenticated(false);
   };
 

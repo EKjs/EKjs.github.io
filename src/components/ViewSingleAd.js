@@ -59,6 +59,23 @@ if (loading)return <LoadingSpinner/>
             {error && <Alert>{error}</Alert>}
             <Col>
             <Row>
+            <Col>
+            <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item"><Link to="/">Main page</Link></li>
+            <li className="breadcrumb-item"><Link to={`/bycategory/${adData.catId}`}>{adData.category}</Link></li>
+            <li className="breadcrumb-item"><Link to={`/bysubcategory/${adData.subCategoryId}`}>{adData.subCategory}</Link></li>
+            <li className="breadcrumb-item"><Link to={`/bycity/${adData.cityId}`}> in {adData.cityName}</Link></li>
+            <li className="breadcrumb-item active" aria-current="page">View article</li>
+{/*             <Route exact path="/bycategory/:catId" component={MainPage} />
+              <Route exact path="/bycity/:cityId" component={MainPage} />
+              <Route exact path="/byuser/:adsByUserId" component={MainPage} />
+              <Route exact path="/bystore/:adsByStoreId" component={MainPage} /> */}
+          </ol>
+        </nav>
+            </Col>
+          </Row>
+            <Row>
             <Col className="m-3 p-3" style={{backgroundColor:'#faf9f9'}}>
                 <Carousel variant="dark">
                   {adData.photos && adData.photos.length>0 ? adData.photos.map((photo, idx) => (
@@ -103,7 +120,7 @@ if (loading)return <LoadingSpinner/>
               <Col sm={4} >
                   <Row>
                   <Col className="m-3 p-3"  style={{backgroundColor:'#faf9f9'}}>
-                    {adData.storeId && (<Row><Col><Link to={`/viewstore/${adData.storeId}`} style={{textDecoration:'none'}}><h4 classname="secondary">{adData.storeName}</h4></Link><br/></Col></Row>)}
+                    {adData.storeId && (<Row><Col><Link to={`/viewstore/${adData.storeId}`} style={{textDecoration:'none'}}><h4 className="secondary">{adData.storeName}</h4></Link><br/></Col></Row>)}
                   <Row>
                   <Col sm={9}>
                     <Link className="fs-6 text-muted" to={`/byuser/${adData.ownerId}`} style={{textDecoration:'none'}}><h4>{adData.userName}</h4></Link>
@@ -121,6 +138,11 @@ if (loading)return <LoadingSpinner/>
                   <Row>
                     <Col>
                     <UserRating userId={adData.ownerId} />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                    <p className='fs-5'>{adData.userType}</p>
                     </Col>
                   </Row>
                   <Row>

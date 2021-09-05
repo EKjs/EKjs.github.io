@@ -12,6 +12,7 @@ const MenuLinks = ({setShow}) => {
   return (
     <ul>
       <li><Dropdown.Item as={Link} to="/" onClick={()=>setShow(false)}>View all ads</Dropdown.Item></li>
+      <li><Dropdown.Item as={Link} to="/buylocal" onClick={()=>setShow(false)}>Buy local (map)</Dropdown.Item></li>
       {categoriesList.map((catItem, idx) => (
         <li key={`likc${idx}`}>
           <Dropdown.Item as={Link} to={`/bycategory/${catItem.id}`} onClick={()=>setShow(false)}>{catItem.description}</Dropdown.Item>

@@ -38,7 +38,7 @@ const Navigation = () => {
               <Dropdown.Item as={Link} to="/myads"><ListStars size={24} style={{marginRight:'1rem'}}/> My ads</Dropdown.Item>
               <Dropdown.Item as={Link} to="/myprofile"><FileEarmarkPerson size={24} style={{marginRight:'1rem'}}/>My profile</Dropdown.Item>
               <Dropdown.Item as={Link} to="/mystore"><CashCoin size={24} style={{marginRight:'1rem'}}/>My Store</Dropdown.Item>
-              <Dropdown.Item as={Link} to="/messages"><LayoutTextWindowReverse size={24} style={{marginRight:'1rem'}}/>Messages</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/messages"><LayoutTextWindowReverse size={24} style={{marginRight:'1rem'}}/>Notifications</Dropdown.Item>
               <Dropdown.Item as={Link} to="/myfavads"><BookmarkHeart size={24} style={{marginRight:'1rem'}}/>Fav ads</Dropdown.Item>
               <Dropdown.Item as={Link} to="/myfavusers"><BookmarkStar size={24} style={{marginRight:'1rem'}}/>Fav users</Dropdown.Item>
               <Dropdown.Divider />
@@ -58,13 +58,15 @@ const Navigation = () => {
             )}
           </Nav>
           {userType==='999' && isAuthenticated && (<Nav>
-            <Dropdown>
+            <Dropdown align="end">
               <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                Admin
+                Admin panel
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
                 <Dropdown.Item as={Link} to="/admin/categoryeditor">Edit categories</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/admin/usertypeeditor">Edit user types</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/admin/userlist">Edit users</Dropdown.Item>
                 
               </Dropdown.Menu>
             </Dropdown>

@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Alert, Row,Col } from "react-bootstrap";
+import { Alert, Row, Col } from "react-bootstrap";
 import AdCard from "./AdCard";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 import PageNums from "./PageNums";
+import NoAdsFound from "./NoAdsFound";
+import BreadCrumbLine from "./BreadCrumbLine";
+
 
 const ADSPERPAGE=8;
 
 const MainPage = () => {
   const {subCatId,catId,cityId,adsByUserId,adsByStoreId} = useParams();
+  
     const [currentlyLoadedAds,setCurrentlyLoadedAds] = useState();
     const [error,setError] = useState(null);
     const [loading,setLoading] = useState(true);
 
     const [curPage,setCurPage] = useState(1);
     const [totalPages,setTotalPages] = useState();
-
-    console.log(subCatId,catId,cityId,adsByUserId);
-    
     useEffect(() => {
       /* '/bycategory/:catId'
 '/bysubcategory/:subCatId' */
@@ -60,11 +61,18 @@ const MainPage = () => {
 
     if (loading) return <LoadingSpinner />;
     if (error) return <Alert variant="danger">{error}</Alert>;
+    
 
-    return (
+    return (<>
+      <Row>
+        <Col>
+          <BreadCrumbLine subCatId={subCatId} catId={catId} cityId={cityId} adsByUserId={adsByUserId} adsByStoreId={adsByStoreId} />
+        </Col>
+      </Row>
       <Row>
         <Col>
         <Row className="g-4">
+          {currentlyLoadedAds.length<1 && <NoAdsFound />}
             {currentlyLoadedAds.map((ad,idx)=>(
             <AdCard key={`adk${idx}`}
             title={ad.title}
@@ -87,10 +95,9 @@ const MainPage = () => {
           <PageNums totalPages={totalPages} currentPage={curPage} cbPageClick={setCurPage} />
           </Col>
         </Row>
-        
         </Col>
       </Row>
-    )
+    </>)
 }
 
 export default MainPage
