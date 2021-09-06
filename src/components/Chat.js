@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import SocketIOClient from 'socket.io-client';
 import { Button } from 'react-bootstrap';
 
 const myWs = new WebSocket('ws://localhost:8080');

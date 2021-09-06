@@ -90,7 +90,7 @@ const MainPage = () => {
             views={ad.views}
              /> ))}
         </Row>
-        <Row className='justify-content-center mt-4'>
+        <Row className='justify-content-center mt-5 border-top pt-3'>
           <Col sm='auto'>
           <PageNums totalPages={totalPages} currentPage={curPage} cbPageClick={setCurPage} />
           </Col>
