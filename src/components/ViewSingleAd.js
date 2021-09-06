@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Alert,Row,Col,Carousel } from 'react-bootstrap';
+import { Alert,Row,Col,Carousel, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -161,6 +161,12 @@ if (loading)return <LoadingSpinner/>
                   <Map height={300} center={adData.coords} defaultZoom={11}>
                     {adData.coords && <Marker width={50} anchor={adData.coords} />}
                   </Map>
+                  </Col>
+                  </Row>
+                  <Row>
+                  <Col className="m-3 p-3"  style={{backgroundColor:'#faf9f9'}}>
+                    {adData.ownerId !== parseInt(localStorage.getItem('userId'),10) && <Button as={Link} to={`/chat/${adData.ownerId}`}>Chat</Button>}
+                    
                   </Col>
                   </Row>
               </Col>
