@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
-import { CashCoin, DoorOpen, FileEarmarkPerson, LayoutTextWindowReverse, ListStars, PersonCheck, PersonPlus, PlusSquare, BookmarkHeart, BookmarkStar, MenuButtonWide } from "react-bootstrap-icons";
+import { CashCoin, DoorOpen, FileEarmarkPerson, LayoutTextWindowReverse, ListStars, PersonCheck, PersonPlus, PlusSquare, BookmarkHeart, BookmarkStar, MenuButtonWide, ChatLeftText } from "react-bootstrap-icons";
 import { NavLink, Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import SideBarMenu from "./SideBarMenu";
@@ -41,6 +41,7 @@ const Navigation = () => {
               <Dropdown.Item as={Link} to="/messages"><LayoutTextWindowReverse size={24} style={{marginRight:'1rem'}}/>Notifications</Dropdown.Item>
               <Dropdown.Item as={Link} to="/myfavads"><BookmarkHeart size={24} style={{marginRight:'1rem'}}/>Fav ads</Dropdown.Item>
               <Dropdown.Item as={Link} to="/myfavusers"><BookmarkStar size={24} style={{marginRight:'1rem'}}/>Fav users</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/mychats"><ChatLeftText size={24} style={{marginRight:'1rem'}}/>My chats</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item onClick={signOut}><DoorOpen size={24} /> Log out</Dropdown.Item>
             </Dropdown.Menu>

@@ -206,8 +206,8 @@ const SearchResults = () => {
           </Col>
           </Row>
           
-          <Row className="g-4">
-          <Alert variant="success">Search results for: </Alert>
+          <Row className="g-4 mt-3 border-top">
+         {/*  <Alert variant="success">Search results for: </Alert> */}
           {currentlyLoadedAds.length<1 && <NoAdsFound />}
             {currentlyLoadedAds.map((ad,idx)=>(
             <AdCard key={`adk${idx}`}
@@ -227,7 +227,7 @@ const SearchResults = () => {
              /> ))}
           </Row>
           </Col>
-          <Row className='d-flex align-items-center justify-content-center mt-4'>
+          <Row className='d-flex align-items-center justify-content-center mt-5 border-top pt-3'>
           <Col sm='auto' className='align-self-center'>
           <PageNums totalPages={totalPages} currentPage={curPage} cbPageClick={setCurPage} />
           </Col>

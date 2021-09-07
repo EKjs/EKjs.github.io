@@ -26,6 +26,7 @@ import AdminListUsers from "./components/admin/AdminListUsers";
 import StoresOnMap from "./components/StoresOnMap";
 import AdminListStores from "./components/admin/AdminListStores";
 import Chat from "./components/Chat";
+import MyChats from "./components/MyChats";
 function App() {
   return (
     <AppContextWrapper>
@@ -41,12 +42,15 @@ function App() {
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/search" component={SearchResults} />
+              <Route exact path="/chat/:withUserId" component={Chat} />
               <Route exact path="/viewstore/:storeId" component={ViewStore} />
               <ProtectedRoute exact path="/myprofile" component={UserProfile} />
               <ProtectedRoute exact path="/myfavads" component={MyFavAds} />
               <ProtectedRoute exact path="/myfavusers" component={MyFavUsers} />
               <ProtectedRoute exact path="/mystore" component={StoreProfile} />
               <ProtectedRoute exact path="/messages" component={MyMessages} />
+              <ProtectedRoute exact path="/mychats" component={MyChats} />
+              
               <ProtectedRoute
                 exact
                 path="/editprofile"
