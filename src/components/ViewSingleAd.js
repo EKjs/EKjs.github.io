@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Alert,Row,Col,Carousel, Button } from 'react-bootstrap';
+import { Alert,Row,Col,Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { Map, Marker } from "pigeon-maps";
 import { TelephoneFill } from 'react-bootstrap-icons';
 import AddToFavsButton from './AddToFavsButton';
 import UserRating from './UserRating';
+import StartChatButton from './StartChatButton';
 
 const ViewSingleAd = () => {
     const {adId}=useParams();
@@ -105,6 +106,10 @@ if (loading)return <LoadingSpinner/>
                  <p className='fs-6 text-muted'>Views: {adData.views}</p> 
                   
               </Col>
+              <Col>
+                 <p className='fs-6 text-muted'>Status: {adData.currentStateDesc}</p> 
+                  
+              </Col>
               <Col className='text-center'>
               <AddToFavsButton targetId={adData.adId} description={adData.title} />
               </Col>
@@ -165,7 +170,8 @@ if (loading)return <LoadingSpinner/>
                   </Row>
                   <Row>
                   <Col className="m-3 p-3"  style={{backgroundColor:'#faf9f9'}}>
-                    {adData.ownerId !== parseInt(localStorage.getItem('userId'),10) && <Button as={Link} to={`/chat/${adData.ownerId}`}>Chat</Button>}
+                    <StartChatButton ownerId={adData.ownerId} />
+                    {/* {adData.ownerId !== parseInt(localStorage.getItem('userId'),10) && <Button as={Link} to={`/chat/${adData.ownerId}`}>Chat</Button>} */}
                     
                   </Col>
                   </Row>

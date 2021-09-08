@@ -64,7 +64,7 @@ const CitiesSearchInput = ({setCoords,setCityId,cityPlaceholder}) => {
         <>
     <FormControl
         type="text"
-        placeholder="City or PLZ"
+        placeholder="City or ZIP"
         aria-label="SearchCityPLZ"
         value={plzOrCityInput}
         onChange={changePlzOrCityInput}

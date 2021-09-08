@@ -23,8 +23,8 @@ const SearchBar = () => {
 
 
 
-  const doSearch = () => {
-
+  const doSearch = (e) => {
+    e.preventDefault();
     //cityId, cityCoords, distance, searchText, catId, subCatId
     const reqBody = {
       cityId: curCityId,
@@ -62,7 +62,7 @@ const SearchBar = () => {
 
   return (
     <Navbar.Text className='me-auto'>
-      <Form className="d-flex flex-column flex-md-row">
+      <Form className="d-flex flex-column flex-md-row" onSubmit={doSearch}>
         <InputGroup className="col">
           <InputGroup.Text style={{ backgroundColor: "#f7f7f9" }}>
             <Search />
@@ -104,7 +104,8 @@ const SearchBar = () => {
             <option value="50"/>
         </datalist>
           <Button
-            onClick={doSearch}
+            type='submit'
+            /* onClick={doSearch} */
             variant="secondary"
             style={{ backgroundColor: "#f7f7f9" }}
           >
