@@ -39,7 +39,7 @@ const AdCard = ({
           />
         </Link>
         <Card.Body>
-          <Card.Title>{price} €</Card.Title>
+          <Card.Title>{price=='0' ? 'Free' : `${price} €`} </Card.Title>
 
           <Card.Text>
             <Link to={`/view/${adId}`} style={{ textDecoration: "none" }}>

@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
     
         <div className="d-flex justify-content-between pt-4 mt-4 border-top">
-          <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+          <p>&copy; 2021 Ibuyit GMBH. All rights reserved.</p>
           <ul className="list-unstyled d-flex">
             <li className="ms-3"><Link className="link-dark" href="/"><svg className="bi" width="24" height="24"><Twitter/></svg></Link></li>
             <li className="ms-3"><Link className="link-dark" href="/"><svg className="bi" width="24" height="24"><Instagram/></svg></Link></li>
